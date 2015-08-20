@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block page_content %}
+    <table>
+        <tbody>
+            <tr>
+                <th>Job name</th>
+                <th>Times run</th>
+                <th>Times failed</th>
+                <th>Last run time</th>
+            </tr>
+            {% for job in object_list %}
+                <tr>
+                    <td>{{ job.name }}</td>
+                    <td>{{ job.times_run }}</td>
+                    <td>{{ job.times_failed }}</td>
+                    <td>{{ job.last_run.start_time|default:'-' }}</td>
+                </tr>
+            {% empty %}
+                <tr>
+                    <td colspan="4" style="text-align: center;">No jobs</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

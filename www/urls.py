@@ -16,6 +16,11 @@ Including another URLconf
 from django.conf.urls import include, url
 from django.contrib import admin
 
+import wdi.jobs.views
+import wdi.jobs.urls
+
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
+    url(r'^$', wdi.jobs.views.IndexView.as_view(), name='index'),
+    url(r'^jobs/', include(wdi.jobs.urls, namespace='jobs')),
 ]

@@ -1,0 +1,45 @@
+{% load staticfiles %}
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>Tangent Importing Dashboard</title>
+        <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+        <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    </head>
+    <body>
+        <header>
+            <div class="container">
+                <div class="row">
+                    <div class="six logo-ts">
+                        <img src="/static/images/logo-ts.png"
+                             width="163" height="46" alt="Tangent"/>
+                    </div>
+                    <div>
+                        <a href="{% url 'jobs:index' %}">Jobs</a>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <div class="container">
+            <div class="alerts">
+                {% for message in messages %}
+                    <div class="alert fade in {{ message.tags }}">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            </div>
+            <div class="row">
+                <div class="twelve column">
+                    {% block page_content %}{% endblock %}
+                </div> <!-- ./twelve column -->
+            </div> <!-- ./row -->
+        </div>
+
+        <script type="text/javascript">
+            {% block extrascripts %}
+            {% endblock %}
+        </script>
+    </body>
+</html>
