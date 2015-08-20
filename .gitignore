@@ -1,3 +1,7 @@
 # Python
 *.py[oc]
 
+# Local
+www/conf/local.py
+www/db.sqlite3
+
