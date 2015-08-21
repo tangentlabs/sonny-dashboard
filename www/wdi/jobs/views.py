@@ -1,6 +1,7 @@
 import json
 
 from django.views import generic
+from django.views.generic import detail
 from django.http import HttpResponse
 from django.core.serializers.json import DjangoJSONEncoder
 
@@ -15,9 +16,10 @@ def json_response(response, **kwargs):
     return HttpResponse(json_dump, content_type="application/json", **kwargs)
 
 
-class IndexView(generic.ListView):
+class JobListView(generic.ListView):
     template_name = 'jobs/index.html'
     model = models.Job
+    paginate_by = 20
 
 
 class JobRunStart(generic.FormView):
@@ -62,3 +64,37 @@ class JobRunProfiling(generic.FormView):
 
     def form_invalid(self, form):
         return json_response({'error': 'invalid form fields'}, status=400)
+
+
+class JobRunListView(generic.ListView):
+    template_name = "jobs/runs/index.html"
+    model = models.JobRun
+    paginate_by = 10
+
+    def get_object(self):
+        return models.Job.objects.get(pk=self.kwargs['pk'])
+
+    def get(self, request, **kwargs):
+        self.job = self.get_object()
+
+        return super(JobRunListView, self).get(request, **kwargs)
+
+    def get_queryset(self):
+        queryset = super(JobRunListView, self).get_queryset()
+
+        queryset = queryset.filter(job=self.job)
+        queryset = queryset.order_by('-start_time')
+
+        return queryset
+
+    def get_context_data(self, **kwargs):
+        context = super(JobRunListView, self).get_context_data(**kwargs)
+
+        context['job'] = self.job
+
+        return context
+
+
+class JobRunProfilingView(generic.DetailView):
+    template_name = "jobs/runs/profiling.html"
+    model = models.JobRun

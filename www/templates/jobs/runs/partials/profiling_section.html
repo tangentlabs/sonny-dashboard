@@ -1,0 +1,8 @@
+<div>
+    {{ section.name }} [{{ section.duration }}]
+</div>
+<ul>
+    {% for child in section.sections %}
+        {% include "jobs/runs/partials/profiling_section.html" with section=child %}
+    {% endfor %}
+</ul>

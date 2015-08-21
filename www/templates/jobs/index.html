@@ -6,7 +6,12 @@
     <link rel="stylesheet" href="{% static 'css/jobs.css' %}">
 {% endblock %}
 
+{% block breadcrumbs %}
+    <li class="active"><a href="{% url 'jobs:index' %}">Jobs</a></li>
+{% endblock %}
+
 {% block page_content %}
+    {% include "partials/pagination.html" %}
     <table>
         <tbody>
             <tr>
@@ -14,6 +19,7 @@
                 <th>History</th>
                 <th>Times run/pending/failed</th>
                 <th>Last run time</th>
+                <th></th>
             </tr>
             {% for job in object_list %}
                 <tr>
@@ -38,12 +44,16 @@
                     </td>
                     <td>{{ job.times_run }}/{{ job.times_pending }}/{{ job.times_failed }}</td>
                     <td>{{ job.last_run.start_time|default:'-' }}</td>
+                    <td>
+                        <a class="button" href="{% url 'jobs:runs' pk=job.id %}">Runs</a>
+                    </td>
                 </tr>
             {% empty %}
                 <tr>
-                    <td colspan="4" style="text-align: center;">No jobs</td>
+                    <td colspan="5" style="text-align: center;">No jobs</td>
                 </tr>
             {% endfor %}
         </tbody>
     </table>
+    {% include "partials/pagination.html" %}
 {% endblock %}

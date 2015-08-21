@@ -63,7 +63,8 @@ class JobRun(models.Model):
 
     @property
     def profiling(self):
-        return json.loads(self.profiling_json)
+        if self.profiling_json:
+            return json.loads(self.profiling_json)
 
     def __str__(self):
         return '<JobRun: %s @ %s>' % (self.job.name, self.start_time)

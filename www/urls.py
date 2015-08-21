@@ -21,6 +21,6 @@ import wdi.jobs.urls
 
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
-    url(r'^$', wdi.jobs.views.IndexView.as_view(), name='index'),
+    url(r'^$', wdi.jobs.views.JobListView.as_view(), name='index'),
     url(r'^jobs/', include(wdi.jobs.urls, namespace='jobs')),
 ]

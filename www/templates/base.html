@@ -32,6 +32,11 @@
                 {% endfor %}
             </div>
             <div class="row">
+                <ul class="breadcrumb">
+                    {% block breadcrumbs %}{% endblock %}
+                </ul>
+            </div>
+            <div class="row">
                 <div class="twelve column">
                     {% block page_content %}{% endblock %}
                 </div> <!-- ./twelve column -->
