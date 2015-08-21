@@ -20,3 +20,8 @@ def register_job_end(job_run, succeeded):
     job_run.succeeded = succeeded
     job_run.finished = True
     job_run.save()
+
+
+def register_job_run_profiling(job_run, profiling_json):
+    job_run.profiling_json = profiling_json
+    job_run.save()

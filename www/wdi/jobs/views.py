@@ -47,3 +47,18 @@ class JobEndRun(generic.FormView):
 
     def form_invalid(self, form):
         return json_response({'error': 'invalid form fields'}, status=400)
+
+
+class JobRunProfiling(generic.FormView):
+    methods = ['post']
+    form_class = forms.JobRunProfilingForm
+
+    def form_valid(self, form):
+        services.register_job_run_profiling(
+            job_run=form.cleaned_data['job_run'],
+            profiling_json=form.cleaned_data['profiling_json'])
+
+        return json_response({'ok': 'ok'})
+
+    def form_invalid(self, form):
+        return json_response({'error': 'invalid form fields'}, status=400)

@@ -1,3 +1,5 @@
+import json
+
 from django.db import models
 
 
@@ -52,11 +54,16 @@ class JobRun(models.Model):
     end_time = models.DateTimeField(null=True)
     succeeded = models.NullBooleanField()
     finished = models.BooleanField(default=False)
+    profiling_json = models.TextField(null=True)
 
     @property
     def duration(self):
         if self.finished:
             return self.end_time - self.start_time
+
+    @property
+    def profiling(self):
+        return json.loads(self.profiling_json)
 
     def __str__(self):
         return '<JobRun: %s @ %s>' % (self.job.name, self.start_time)

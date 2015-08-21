@@ -12,3 +12,8 @@ class JobStartForm(forms.ModelForm):
 class JobEndForm(forms.Form):
     job_run = forms.ModelChoiceField(queryset=models.JobRun.objects.all(), required=True)
     succeeded = forms.BooleanField(required=True)
+
+
+class JobRunProfilingForm(forms.Form):
+    job_run = forms.ModelChoiceField(queryset=models.JobRun.objects.all(), required=True)
+    profiling_json = forms.CharField(required=True)
