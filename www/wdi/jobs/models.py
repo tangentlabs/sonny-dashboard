@@ -6,7 +6,7 @@ class Job(models.Model):
         app_label = 'jobs'
 
     name = models.CharField(max_length=256, null=False)
-    uuid = models.CharField(max_length=32, null=False)
+    uuid = models.CharField(max_length=64, null=False)
 
     @property
     def times_run(self):
@@ -14,7 +14,21 @@ class Job(models.Model):
 
     @property
     def times_failed(self):
-        return self.jobrun_set.filter(succeded=False).count()
+        return self.jobrun_set.filter(succeeded=False).count()
+
+    @property
+    def times_succeeded(self):
+        return self.jobrun_set.filter(succeeded=True).count()
+
+    @property
+    def times_pending(self):
+        return self.jobrun_set.filter(finished=False).count()
+
+    @property
+    def recent_history(self):
+        runs = self.jobrun_set.order_by('-start_time')
+
+        return runs[:5:-1]
 
     @property
     def last_run(self):
@@ -34,9 +48,15 @@ class JobRun(models.Model):
         app_label = 'jobs'
 
     job = models.ForeignKey('jobs.Job')
-    start_time = models.DateTimeField(null=False)
-    end_time = models.DateTimeField()
-    succeded = models.BooleanField()
+    start_time = models.DateTimeField(auto_now_add=True, null=False)
+    end_time = models.DateTimeField(null=True)
+    succeeded = models.NullBooleanField()
+    finished = models.BooleanField(default=False)
+
+    @property
+    def duration(self):
+        if self.finished:
+            return self.end_time - self.start_time
 
     def __str__(self):
         return '<JobRun: %s @ %s>' % (self.job.name, self.start_time)

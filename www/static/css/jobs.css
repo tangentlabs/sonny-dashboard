@@ -1,0 +1,19 @@
+.job-status:after {
+    content: "?";
+    background-color: gray;
+}
+
+.job-status.succeeded:after {
+    content: "\2713";
+    color: green;
+}
+
+.job-status.failed:after {
+    content: "\2717";
+    color: red;
+}
+
+.job-status.pending:after {
+    content: "\25b6";
+    color: yellow;
+}

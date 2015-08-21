@@ -1,19 +1,42 @@
 {% extends "base.html" %}
 
+{% load staticfiles %}
+
+{% block extrastyles %}
+    <link rel="stylesheet" href="{% static 'css/jobs.css' %}">
+{% endblock %}
+
 {% block page_content %}
     <table>
         <tbody>
             <tr>
                 <th>Job name</th>
-                <th>Times run</th>
-                <th>Times failed</th>
+                <th>History</th>
+                <th>Times run/pending/failed</th>
                 <th>Last run time</th>
             </tr>
             {% for job in object_list %}
                 <tr>
                     <td>{{ job.name }}</td>
-                    <td>{{ job.times_run }}</td>
-                    <td>{{ job.times_failed }}</td>
+                    <td>
+                        {# We don't want any space between them #}
+                        {% for point in job.recent_history %}<span
+                            class="job-status
+                                {% if point.finished and point.succeeded %}
+                                    succeeded
+                                {% elif point.finished and not point.succeeded %}
+                                    failed
+                                {% elif not point.finished %}
+                                    pending
+                                {% endif %}"
+                            title="{% if point.finished %}
+                                Duration: {{ point.duration }}
+                            {% else %}
+                                Running since {{ point.start_time }}
+                            {% endif %}"
+                        ></span>{% endfor %}
+                    </td>
+                    <td>{{ job.times_run }}/{{ job.times_pending }}/{{ job.times_failed }}</td>
                     <td>{{ job.last_run.start_time|default:'-' }}</td>
                 </tr>
             {% empty %}
