@@ -1,4 +1,4 @@
-from datetime import datetime
+from django.utils import timezone
 
 from wdi.jobs import models
 
@@ -16,7 +16,7 @@ def register_job_start(name, uuid):
 
 
 def register_job_end(job_run, succeeded):
-    job_run.end_time = datetime.now()
+    job_run.end_time = timezone.now()
     job_run.succeeded = succeeded
     job_run.finished = True
     job_run.save()
