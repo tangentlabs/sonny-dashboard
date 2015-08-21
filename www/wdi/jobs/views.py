@@ -20,9 +20,9 @@ class IndexView(generic.ListView):
     model = models.Job
 
 
-class JobStartRun(generic.FormView):
+class JobRunStart(generic.FormView):
     methods = ['post']
-    form_class = forms.JobStartForm
+    form_class = forms.JobRunStartForm
 
     def form_valid(self, form):
         job_run = services.register_job_start(
@@ -34,9 +34,9 @@ class JobStartRun(generic.FormView):
         return json_response({'error': 'invalid form fields'}, status=400)
 
 
-class JobEndRun(generic.FormView):
+class JobRunEnd(generic.FormView):
     methods = ['post']
-    form_class = forms.JobEndForm
+    form_class = forms.JobRunEndForm
 
     def form_valid(self, form):
         services.register_job_end(
