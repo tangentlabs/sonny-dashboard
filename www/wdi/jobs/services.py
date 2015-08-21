@@ -3,12 +3,30 @@ from django.utils import timezone
 from wdi.jobs import models
 
 
-def register_job_start(name, uuid):
-    job, _ = models.Job.objects.get_or_create(uuid=uuid)
+def register_jobs(jobs):
+    uuids = []
+    for job_details in jobs['importers']:
+        uuid = job_details['uuid']
+        name = job_details['name']
+        job, _ = models.Job.objects.get_or_create(uuid=uuid)
 
-    if job.name != name:
+        job.available = True
         job.name = name
         job.save()
+
+        uuids.append(uuid)
+
+    models.Job.objects\
+        .exclude(uuid__in=uuids)\
+        .update(available=False)
+
+
+def register_job_start(name, uuid):
+    jobs = models.Job.objects.filter(uuid=uuid)
+    if jobs.exists():
+        job = jobs.get()
+    else:
+        job = models.Job.objects.create(uuid=uuid, name=name)
 
     job_run = models.JobRun.objects.create(job=job)
 

@@ -16,6 +16,7 @@
         <tbody>
             <tr>
                 <th>Job name</th>
+                <th>Available</th>
                 <th>History</th>
                 <th>Times run/pending/failed</th>
                 <th>Last run time</th>
@@ -23,7 +24,8 @@
             </tr>
             {% for job in object_list %}
                 <tr>
-                    <td>{{ job.name }}</td>
+                    <td>{{ job.short_name }}</td>
+                    <td>{{ job.available }}</td>
                     <td>
                         {# We don't want any space between them #}
                         {% for point in job.recent_history %}<span
@@ -45,7 +47,9 @@
                     <td>{{ job.times_run }}/{{ job.times_pending }}/{{ job.times_failed }}</td>
                     <td>{{ job.last_run.start_time|default:'-' }}</td>
                     <td>
+                        {% if job.jobrun_set.exists %}
                         <a class="button" href="{% url 'jobs:runs' pk=job.id %}">Runs</a>
+                        {% endif %}
                     </td>
                 </tr>
             {% empty %}

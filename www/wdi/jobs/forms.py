@@ -3,6 +3,10 @@ from django import forms
 from wdi.jobs import models
 
 
+class RegisterJobsForm(forms.Form):
+    jobs = forms.CharField(required=True)
+
+
 class JobRunStartForm(forms.ModelForm):
     class Meta(object):
         model = models.Job

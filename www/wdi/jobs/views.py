@@ -1,7 +1,6 @@
 import json
 
 from django.views import generic
-from django.views.generic import detail
 from django.http import HttpResponse
 from django.core.serializers.json import DjangoJSONEncoder
 
@@ -20,6 +19,20 @@ class JobListView(generic.ListView):
     template_name = 'jobs/index.html'
     model = models.Job
     paginate_by = 20
+
+
+class RegisterJobsView(generic.FormView):
+    methods = ['post']
+    form_class = forms.RegisterJobsForm
+
+    def form_valid(self, form):
+        services.register_jobs(
+            jobs=json.loads(form.cleaned_data['jobs']))
+
+        return json_response({'ok': 'ok'})
+
+    def form_invalid(self, form):
+        return json_response({'error': 'invalid form fields'}, status=400)
 
 
 class JobRunStart(generic.FormView):

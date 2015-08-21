@@ -9,6 +9,11 @@ class Job(models.Model):
 
     name = models.CharField(max_length=256, null=False)
     uuid = models.CharField(max_length=64, null=False)
+    available = models.BooleanField(default=True)
+
+    @property
+    def short_name(self):
+        return self.name.split(':')[-1]
 
     @property
     def times_run(self):
