@@ -17,3 +17,25 @@
     content: "\25b6";
     color: yellow;
 }
+
+.profiling-duration-bar {
+    background-color: red;
+    color: white;
+    height: 1.5em;
+    overflow: hidden;
+}
+
+.profiling-duration-bar:before {
+    content: "Time:";
+}
+
+.profiling-memory-bar {
+    background-color: green;
+    color: white;
+    height: 1.5em;
+    overflow: hidden;
+}
+
+.profiling-memory-bar:before {
+    content: "Mem:";
+}

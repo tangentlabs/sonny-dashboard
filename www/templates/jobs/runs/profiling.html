@@ -15,5 +15,7 @@
 {% endblock %}
 
 {% block page_content %}
-    {% include "jobs/runs/partials/profiling_section.html" with section=object.profiling %}
+    <ul>
+        {% include "jobs/runs/partials/profiling_section.html" with total_duration=object.profiling.duration total_memory=object.profiling.memory section=object.profiling %}
+    </ul>
 {% endblock %}

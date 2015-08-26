@@ -1,8 +1,22 @@
-<div>
-    {{ section.name }} [{{ section.duration }}]
-</div>
-<ul>
-    {% for child in section.sections %}
-        {% include "jobs/runs/partials/profiling_section.html" with section=child %}
-    {% endfor %}
-</ul>
+<li>
+    <div>
+        {{ section.name }} [{{ section.duration }}s, {{ section.memory|filesizeformat }}]
+        {% if total_duration %}
+            <div class="profiling-duration-bar"
+                 style="width: {% widthratio section.duration total_duration 100 %}%;">
+                {% widthratio section.duration total_duration 100 %}%
+            </div>
+        {% endif %}
+        {% if total_memory %}
+            <div class="profiling-memory-bar"
+                 style="width: {% widthratio section.memory total_memory 100 %}%;">
+                {% widthratio section.memory total_memory 100 %}%
+            </div>
+        {% endif %}
+    </div>
+    <ul>
+        {% for child in section.sections %}
+            {% include "jobs/runs/partials/profiling_section.html" with total_duration=total_duration total_memory=total_memory section=child %}
+        {% endfor %}
+    </ul>
+</li>
