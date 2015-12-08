@@ -1,6 +1,5 @@
 .job-status:after {
     content: "?";
-    background-color: gray;
 }
 
 .job-status.succeeded:after {
