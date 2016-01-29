@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from wdi.jobs import models
+from tangent_importer_dashboard.apps.jobs import models
 
 
 admin.site.register(models.Job)

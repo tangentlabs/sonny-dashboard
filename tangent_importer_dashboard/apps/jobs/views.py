@@ -4,10 +4,10 @@ from django.views import generic
 from django.http import HttpResponse
 from django.core.serializers.json import DjangoJSONEncoder
 
-from wdi.jobs import forms
-from wdi.jobs import services
+from tangent_importer_dashboard.apps.jobs import forms
+from tangent_importer_dashboard.apps.jobs import services
 
-from wdi.jobs import models
+from tangent_importer_dashboard.apps.jobs import models
 
 
 def json_response(response, **kwargs):

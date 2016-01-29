@@ -556,7 +556,7 @@ hr {
 }
 
 /* Other styles*/
-.logo-ts {
+.logo {
     text-align: center;
     }
 
@@ -571,7 +571,7 @@ hr {
 
 /* Larger than phablet (also point when grid becomes active) */
 @media (min-width: 550px) {
-.logo-ts {
+    .logo {
     text-align: left;
     }
 

@@ -1,7 +1,7 @@
 Tangent Importing Dashboard
 ====
 
-A dashboard to display job runs from https://github.com/tangentlabs/tangent-importer
+A dashboard to display job runs from `Tangent Importer <https://github.com/tangentlabs/tangent-importer>`_
 
 
 Getting started
@@ -13,4 +13,3 @@ Create a virtual environment, and use ``make``
 
   mkvirtualenv tangent-importer-dashboard
   make
-

@@ -1,7 +1,7 @@
 from django.conf.urls import include, url
 from django.views.decorators.csrf import csrf_exempt
 
-from wdi.jobs import views
+from tangent_importer_dashboard.apps.jobs import views
 
 urlpatterns = [
     url(r'^$', views.JobListView.as_view(), name='index'),

@@ -13,10 +13,12 @@
         <header>
             <div class="container">
                 <div class="row">
-                    <div class="six logo-ts">
-                        <img src="/static/images/logo-ts.png"
-                             width="163" height="46" alt="Tangent"/>
-                    </div>
+                    {% block logo_image %}
+                        <div class="six logo">
+                            <img src="/static/images/logo-ts.png"
+                                 width="163" height="46" alt="Tangent"/>
+                        </div>
+                    {% endblock %}
                     <div>
                         <a href="{% url 'jobs:index' %}">Jobs</a>
                     </div>

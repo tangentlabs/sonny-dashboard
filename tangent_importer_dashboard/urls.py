@@ -16,11 +16,11 @@ Including another URLconf
 from django.conf.urls import include, url
 from django.contrib import admin
 
-import wdi.jobs.views
-import wdi.jobs.urls
+import tangent_importer_dashboard.apps.jobs.views
+import tangent_importer_dashboard.apps.jobs.urls
 
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
-    url(r'^$', wdi.jobs.views.JobListView.as_view(), name='index'),
-    url(r'^jobs/', include(wdi.jobs.urls, namespace='jobs')),
+    url(r'^$', tangent_importer_dashboard.apps.jobs.views.JobListView.as_view(), name='index'),
+    url(r'^jobs/', include(tangent_importer_dashboard.apps.jobs.urls, namespace='jobs')),
 ]

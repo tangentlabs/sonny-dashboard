@@ -1,6 +1,6 @@
 from django.utils import timezone
 
-from wdi.jobs import models
+from tangent_importer_dashboard.apps.jobs import models
 
 
 def register_jobs(jobs):
