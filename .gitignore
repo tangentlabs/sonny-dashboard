@@ -1,5 +1,8 @@
 # Python
 *.py[oc]
+build/
+dist/
+*.egg-info
 
 # Local
 www/conf/local.py
