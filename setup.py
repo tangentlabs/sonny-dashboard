@@ -3,10 +3,10 @@ from setuptools import setup, find_packages
 
 
 setup(
-    name='tangent_importer_dashboard',
+    name='sonny_dashboard',
     version='0.1',
-    description='Dashboard for Tangent Importer framework',
-    url='http://github.com/tangentlabs/tangent-importer-dashboard',
+    description='Dashboard for Sonny Importer framework',
+    url='http://github.com/tangentlabs/sonny-dashboard',
     author='Costas Basdekis',
     author_email='costas@basdekis.io',
     license='MIT',

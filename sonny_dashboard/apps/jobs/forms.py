@@ -1,6 +1,6 @@
 from django import forms
 
-from tangent_importer_dashboard.apps.jobs import models
+from sonny_dashboard.apps.jobs import models
 
 
 class RegisterJobsForm(forms.Form):
